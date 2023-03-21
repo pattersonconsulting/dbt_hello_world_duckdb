@@ -1,0 +1,34 @@
+
+version: 2
+
+sources:
+  - name: patient_visits
+    schema: main
+    description: "The main patient visits raw data table"
+    tables:
+      - name: patient_visits
+        columns:
+          - name: PatientID
+          - name: Date
+
+models:
+  - name: patient_visits_summed_model
+    description: "A starter duckdb dbt model"
+    columns:
+      - name: PatientID
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
+      - name: visits
+        description: "the summed visits across time for this patient"
+  - name: patient_visits_summed_over_5
+    description: "Only Patients who made at least 5 visits"
+    columns:
+      - name: PatientID
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
+      - name: visits
+        description: "the summed visits across time for this patient"
